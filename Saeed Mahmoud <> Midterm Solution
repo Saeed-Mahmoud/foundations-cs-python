@@ -1,1 +1,70 @@
+def displayMenuAdmin():
+    print("\n-----------------------------------")
+    print("1.Display Statistics\n" +
+     "2.Book a Ticket\n" +
+     "3.Invert Dictionary\n" +
+     "4.Display all Tickets\n" + 
+     "5.Change Ticket’s Priority\n" + 
+     "6.Disable Ticket\n" + 
+     "7.Exit") #This fucntionis to display the menu to the admin
+    print("-----------------------------------")
 
+def displayMenuUser():
+    print("\n-----------------------------------")
+    print("1.Book Ticket\n" +
+     "2.Exit")
+  #this function is to display the menu to the user
+    print("-----------------------------------")
+
+
+def main():
+  #This is the main function that will run the entire code
+  u_name=input("Enter username: ")
+  adm="admin"
+  if u_name==adm:
+    count=0
+    while (count != 5): #O(1) becuase the loop is has a constant value
+      p_word=input("Enter Password: ")
+      pswrd="admin123123"
+      if p_word!=pswrd:
+        count +=1
+      else:
+        displayMenuAdmin()
+        choice = eval(input("Enter your choice:"))
+        while (choice != 7):
+          if choice == 1:
+            print("Under Construction")
+          elif choice == 2:
+            print("Under Construction")
+          elif choice == 3:
+            print("Under Construction")
+          elif choice == 4:
+            print("Under Construction")
+          elif choice == 5:
+            print("Under Construction")
+          elif choice == 6:
+            print("Under Construction")
+          elif choice != 7:
+            print("Your choice is invalid. Try again.")
+          
+          displayMenuAdmin()
+          choice = eval(input("Enter your choice:"))
+
+        print("\n---> You Exited!")
+        break
+      
+
+  else:
+    displayMenuUser()
+    choice1=eval(input("Enter your choice:"))
+    while (choice1 != 2):
+      
+      if choice1 == 1:
+        print("Under Construction")
+      elif choice1 != 2:
+          print("Your choice is invalid. Try again.")
+      displayMenuUser()
+      choice1 = eval(input("Enter your choice:"))
+    print("\n---> You Exited!")
+
+main() 
