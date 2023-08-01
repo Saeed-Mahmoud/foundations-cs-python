@@ -1,3 +1,29 @@
+def displayMenuUser():#O(1)
+    print("\n-----------------------------------")
+    print("1.Book Ticket\n" +
+     "2.Exit")
+  #this function is to display the menu to the user
+    print("-----------------------------------")
+
+def eventMenu():
+  #This function is to display the events
+  print("\n-----------------------------------")
+  print("1.RnB\n" +
+     "2.Live Concert\n" +
+     "3.Arabic\n" +
+     "4.Exit")
+
+def displayMenuAdmin():#O(1)
+    print("\n-----------------------------------")
+    print("1.Display Statistics\n" +
+     "2.Book a Ticket\n" +
+     "3.Display all Tickets\n" +
+     "4.Change Ticket’s Priority\n" + 
+     "5.Disable Ticket\n" + 
+     "6.Run Event\n" + 
+     "7.Exit") #This fucntionis to display the menu to the admin
+    print("-----------------------------------")
+
 def displayStatistics(event_id):
 #this function finds the Max Number of tickets that is signed for each event by taking the events occurence list, putting them in a set to remove all duplicates, making a list of the number of occurence for each event taken from that set. and 
   set_events=set()
@@ -11,13 +37,6 @@ def displayStatistics(event_id):
     max_event_num.append(event_id.count(count_list[i]))
   print("Event ID: ", count_list[max_event_num.index(max(max_event_num))], "has the highest number of tickets", max(max_event_num)) #took the count method from https://sparkbyexamples.com/
 
-def eventMenu():
-  #This function is to display the events
-  print("\n-----------------------------------")
-  print("1.RnB\n" +
-     "2.Live Concert\n" +
-     "3.Arabic\n" +
-     "4.Exit")
 
 def adminBookTickets(listt):
   c=listt[-1][0]
@@ -63,10 +82,8 @@ def adminBookTickets(listt):
       choice1 = eval(input("Enter your choice:"))
   print("\n---> You Exited!")
 
-def displayTicketsAll(listt):
-  date=input("Enter Today's date to see the available tickets booked")
-  tick_ordered=[]
-  
+
+
 def sortToDisplay(listt): 
   for x in range(len(listt)):
     check_swap = False
@@ -83,7 +100,22 @@ def sortToDisplay(listt):
         listt[y + 1] = temp
     if not check_swap:
       return listt
+
+
+def sortByPrio(listt): 
+  for x in range(len(listt)):
+    check_swap = False
+    for y in range(len(listt) - x - 1):
+      if listt[y][-1] > listt[y + 1][-1]:
+        check_swap = True
+        temp = listt[y]
+        listt[y] = listt[y + 1]
+        listt[y + 1] = temp
+    if not check_swap:
+      return listt 
   
+
+
 def displayTicketsAll(l,d):
   date=input("Enter todays date in the format (YYYYMMDD): ")
   sortToDisplay(l)
@@ -110,6 +142,7 @@ def displayTicketsAll(l,d):
     return (l[k:])
 
 
+
 def ChangePrio(l,e):
   for i in range(len(l)):
     print(i, l[i],'\n')
@@ -121,6 +154,9 @@ def ChangePrio(l,e):
       if a == l[i][0]:
         b=input("New Priority level= ")
         l[i][-1]=b
+
+
+
 def disableTick(l,e):
   for i in range(len(l)):
     print(i, l[i],'\n')
@@ -132,25 +168,66 @@ def disableTick(l,e):
       if (a == l[i][0]):
         l.pop(i)
         return(l)
-  # def userBookTickets():
 
-def displayMenuAdmin():#O(1)
-    print("\n-----------------------------------")
-    print("1.Display Statistics\n" +
-     "2.Book a Ticket\n" +
-     "3.Display all Tickets\n" +
-     "4.Change Ticket’s Priority\n" + 
-     "5.Disable Ticket\n" + 
-     "6.Run Event\n" + 
-     "7.Exit") #This fucntionis to display the menu to the admin
-    print("-----------------------------------")
 
-def displayMenuUser():#O(1)
-    print("\n-----------------------------------")
-    print("1.Book Ticket\n" +
-     "2.Exit")
-  #this function is to display the menu to the user
-    print("-----------------------------------")
+def userBookTickets(listt, l, a):
+  c=listt[-1][0]
+  t_suf=int(c[4:])
+  t_pre=c[:4]
+  eventMenu()
+  choice1=eval(input("Enter your choice:"))
+  while (choice1 != 4):
+    temp=[]
+    if choice1 == 1:
+      ev_id="ev001"
+      date=input("Enter the date of the event (YYYYMMDD format): ")
+      name=a
+      prio=input("Set the Priority: ")
+      t_suf+=1
+      new_tick=t_pre+str(t_suf)
+      temp=[new_tick,ev_id,name,date,prio]
+      l.append(temp)
+      return l
+    elif choice1 == 2:
+      ev_id="ev002"
+      date=input("Enter the date of the event (YYYYMMDD format): ")
+      name=input("Enter Name of ticket holder: ")
+      prio=input("Set the Priority: ")
+      t_suf+=1
+      new_tick=t_pre+str(t_suf)
+      temp=[new_tick,ev_id,name,date,prio]
+      l.append(temp)
+      return l
+    elif choice1 == 3:
+      ev_id="ev003"
+      date=input("Enter the date of the event (YYYYMMDD format): ")
+      name=input("Enter Name of ticket holder: ")
+      prio=input("Set the Priority: ")
+      t_suf+=1
+      new_tick=t_pre+str(t_suf)
+      temp=[new_tick,ev_id,name,date,prio]
+      l.append(temp)
+      return l
+    elif choice1 != 4:
+      print("Your choice is invalid. Try again.")
+      eventMenu()
+      choice1 = eval(input("Enter your choice:"))
+  print("\n---> You Exited!")
+
+def runEvent(l,e):
+  a=input("Enter the date of today to run the event: ")
+  temp=[]
+  b=len(l)
+  if e.count(a)==0:
+    print("No events found today.")
+  else:
+    for x in range(b-1):
+      if (a == l[x][3]):
+        temp.append(l[x])
+        l.pop(x)
+        sortByPrio(temp)
+    print(temp)
+
 
 
 def main():
@@ -202,7 +279,7 @@ def main():
           elif choice == 5:
             print(disableTick(data_i_l,tick_num))
           elif choice == 6:
-            print("Under Construction")
+            runEvent(data_i_l,date_keys)
           elif choice != 7:
             print("Your choice is invalid. Try again.")
           
@@ -219,7 +296,12 @@ def main():
     while (choice1 != 2):
       
       if choice1 == 1:
-        print("Under Construction")
+        temp=[]
+        userBookTickets(data_i_l, temp, u_name)
+        with open('Events.csv','a') as f:
+          writer=csv.writer(f)
+          writer.writerow(temp)
+          f.close()
       elif choice1 != 2:
           print("Your choice is invalid. Try again.")
       displayMenuUser()
