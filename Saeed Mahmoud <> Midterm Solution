@@ -2,7 +2,7 @@ def displayMenuAdmin():
     print("\n-----------------------------------")
     print("1.Display Statistics\n" +
      "2.Book a Ticket\n" +
-     "3.Invert Dictionary\n" +
+     "3.Change Ticket’s Priority\n" +
      "4.Display all Tickets\n" + 
      "5.Change Ticket’s Priority\n" + 
      "6.Disable Ticket\n" + 
