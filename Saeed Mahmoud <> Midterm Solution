@@ -62,12 +62,11 @@ def main():
   adm="admin"
   if u_name==adm:
     count=0
-    while (count != 6): #O(1) becuase the loop has a constant value
+    while (count != 5): #O(1) becuase the loop has a constant value
       p_word=input("Enter Password: ")
       pswrd="admin123123"
-      if (count==5):
-        count+=1
-        print("You have reached the limit of attempts")
+      if (count==4):
+        print("This was your last Chance")
       elif p_word!=pswrd:
         count +=1
         print("Incorrect Password")
