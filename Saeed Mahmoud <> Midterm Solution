@@ -1,7 +1,5 @@
 def displayStatistics(event_id):
-#this function finds the highest Number of tickets that is signed for each event by taking the events occurence list, putting them in a 
-#set to remove all duplicates, making a list of the number of occurence for each event_id taken from that set. and then find the Event 
-#with the highest number of tickets 
+#this function finds the Max Number of tickets that is signed for each event by taking the events occurence list, putting them in a set to remove all duplicates, making a list of the number of occurence for each event taken from that set. and 
   set_events=set()
   for i in event_id:
     set_events.add(i)
@@ -11,9 +9,58 @@ def displayStatistics(event_id):
   for i in range(len(count_list)):
     max_event_num=[]
     max_event_num.append(event_id.count(count_list[i]))
-  print("Event ID: ", count_list[max_event_num.index(max(max_event_num))], "has the highest number of tickets", max(max_event_num))
+  print("Event ID: ", count_list[max_event_num.index(max(max_event_num))], "has the highest number of tickets", max(max_event_num)) #took the count method from https://sparkbyexamples.com/
 
-# def adminBookTickets():
+def eventMenu():
+  print("\n-----------------------------------")
+  print("1.RnB\n" +
+     "2.Live Concert\n" +
+     "3.Arabic\n" +
+     "4.Exit")
+def adminBookTickets(listt):
+  c=listt[-1][0]
+  t_suf=int(c[4:])
+  t_pre=c[:4]
+  eventMenu()
+  choice1=eval(input("Enter your choice:"))
+  while (choice1 != 4):
+    temp=[]
+    if choice1 == 1:
+      ev_id="ev001"
+      date=input("Enter the date of the event (YYYYMMDD format): ")
+      name=input("Enter Name of ticket holder: ")
+      prio=input("Set the Priority: ")
+      t_suf+=1
+      new_tick=t_pre+str(t_suf)
+      temp=[new_tick,ev_id,name,date,prio]
+      listt.append(temp)
+      return listt
+    elif choice1 == 2:
+      ev_id="ev002"
+      date=input("Enter the date of the event (YYYYMMDD format): ")
+      name=input("Enter Name of ticket holder: ")
+      prio=input("Set the Priority: ")
+      t_suf+=1
+      new_tick=t_pre+str(t_suf)
+      temp=[new_tick,ev_id,name,date,prio]
+      listt.append(temp)
+      return listt
+    elif choice1 == 3:
+      ev_id="ev003"
+      date=input("Enter the date of the event (YYYYMMDD format): ")
+      name=input("Enter Name of ticket holder: ")
+      prio=input("Set the Priority: ")
+      t_suf+=1
+      new_tick=t_pre+str(t_suf)
+      temp=[new_tick,ev_id,name,date,prio]
+      listt.append(temp)
+      return listt
+    elif choice1 != 4:
+      print("Your choice is invalid. Try again.")
+      eventMenu()
+      choice1 = eval(input("Enter your choice:"))
+  print("\n---> You Exited!")
+
 
 # def changePriority():
 
@@ -42,6 +89,7 @@ def displayMenuUser():#O(1)
 
 def main():
   #This is the main function that will run the entire code
+  #Got the read and append method from an online source but I can't remember the site (openned so many because the file kept on writing on the same line) 
   import csv
   data_i_l=[]
   with open('Events.csv','r') as f:
@@ -66,8 +114,8 @@ def main():
       p_word=input("Enter Password: ")
       pswrd="admin123123"
       if (count==4):
-        print("This was your last Chance")
-      elif p_word!=pswrd:
+        print("This was your last chance")
+      if p_word!=pswrd:
         count +=1
         print("Incorrect Password")
       else:
@@ -77,7 +125,8 @@ def main():
           if choice == 1:
             displayStatistics(event_id)
           elif choice == 2:
-            print("Under Construction")
+            print(adminBookTickets(data_i_l))
+            
           elif choice == 3:
             print("Under Construction")
           elif choice == 4:
@@ -111,4 +160,4 @@ def main():
 
 main() 
 
-#I need to explain what each function does and to add the BigO notation
+#I need to explainwhat each function does and to add the BigO notation
