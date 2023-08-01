@@ -1,4 +1,27 @@
-def displayMenuAdmin():
+def displayStatistics(event_id):
+#this function finds the highest Number of tickets that is signed for each event by taking the events occurence list, putting them in a 
+#set to remove all duplicates, making a list of the number of occurence for each event_id taken from that set. and then find the Event 
+#with the highest number of tickets 
+  set_events=set()
+  for i in event_id:
+    set_events.add(i)
+  for i in set_events:
+    count_list=[]
+    count_list.append(i)
+  for i in range(len(count_list)):
+    max_event_num=[]
+    max_event_num.append(event_id.count(count_list[i]))
+  print("Event ID: ", count_list[max_event_num.index(max(max_event_num))], "has the highest number of tickets", max(max_event_num))
+
+# def adminBookTickets():
+
+# def changePriority():
+
+# def displayTicketsAll():
+
+# def userBookTickets():
+
+def displayMenuAdmin():#O(1)
     print("\n-----------------------------------")
     print("1.Display Statistics\n" +
      "2.Book a Ticket\n" +
@@ -9,7 +32,7 @@ def displayMenuAdmin():
      "7.Exit") #This fucntionis to display the menu to the admin
     print("-----------------------------------")
 
-def displayMenuUser():
+def displayMenuUser():#O(1)
     print("\n-----------------------------------")
     print("1.Book Ticket\n" +
      "2.Exit")
@@ -20,16 +43,26 @@ def displayMenuUser():
 def main():
   #This is the main function that will run the entire code
   import csv
-  listt=[]
-  with open('Events.csv','r')as file:
-    filecontent=csv.reader(file)
-    for row in filecontent:
-      listt.append(row)
+  data_i_l=[]
+  with open('Events.csv','r') as f:
+   filecontent=csv.reader(f)
+   for row in filecontent:
+    data_i_l.append(row)
+  f.close()
+  date_keys=[]
+  event_id=[]
+  for i in range(len(data_i_l)):
+    date_keys.append(data_i_l[i][3])
+    event_id.append(data_i_l[i][1])
+
+
+  
+  print("Welcome to our Humble Ticketing system.")
   u_name=input("Enter username: ")
   adm="admin"
   if u_name==adm:
     count=0
-    while (count != 6): #O(1) becuase the loop is has a constant value
+    while (count != 6): #O(1) becuase the loop has a constant value
       p_word=input("Enter Password: ")
       pswrd="admin123123"
       if (count==5):
@@ -43,7 +76,7 @@ def main():
         choice = eval(input("Enter your choice:"))
         while (choice != 7):
           if choice == 1:
-            print("Under Construction")
+            displayStatistics(event_id)
           elif choice == 2:
             print("Under Construction")
           elif choice == 3:
@@ -78,3 +111,5 @@ def main():
     print("\n---> You Exited!")
 
 main() 
+
+#I need to explain what each function does and to add the BigO notation
