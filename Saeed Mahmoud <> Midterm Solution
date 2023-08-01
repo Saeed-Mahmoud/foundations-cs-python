@@ -18,6 +18,7 @@ def eventMenu():
      "2.Live Concert\n" +
      "3.Arabic\n" +
      "4.Exit")
+
 def adminBookTickets(listt):
   c=listt[-1][0]
   t_suf=int(c[4:])
@@ -66,8 +67,6 @@ def displayTicketsAll(listt):
   date=input("Enter Today's date to see the available tickets booked")
   tick_ordered=[]
   
-
-# def changePriority(listt):
 def sortToDisplay(listt): 
   for x in range(len(listt)):
     check_swap = False
@@ -109,7 +108,31 @@ def displayTicketsAll(l,d):
       else:  # if k > l[mid]
         low = mid + 1
     return (l[k:])
-# def userBookTickets():
+
+
+def ChangePrio(l,e):
+  for i in range(len(l)):
+    print(i, l[i],'\n')
+  a=input("Enter the Tick# you want to alter it's priority: ")
+  if e.count(a)==0:
+    print("Ticket number is not found")
+  else:
+    for i in range(len(l)):
+      if a == l[i][0]:
+        b=input("New Priority level= ")
+        l[i][-1]=b
+def disableTick(l,e):
+  for i in range(len(l)):
+    print(i, l[i],'\n')
+  a=input("Enter the Tick# you want to remove: ")
+  if e.count(a)==0:
+    print("Ticket number is not found")
+  else:
+    for i in range(len(l)):
+      if (a == l[i][0]):
+        l.pop(i)
+        return(l)
+  # def userBookTickets():
 
 def displayMenuAdmin():#O(1)
     print("\n-----------------------------------")
@@ -142,9 +165,11 @@ def main():
   f.close()
   date_keys=[]
   event_id=[]
+  tick_num=[]
   for i in range(len(data_i_l)):
     date_keys.append(data_i_l[i][3])
     event_id.append(data_i_l[i][1])
+    tick_num.append(data_i_l[i][0])
 
 
   
@@ -173,9 +198,9 @@ def main():
           elif choice == 3:
             print(displayTicketsAll(data_i_l, date_keys))
           elif choice == 4:
-            print("Under Construction")
+            ChangePrio(data_i_l, tick_num)
           elif choice == 5:
-            print("Under Construction")
+            print(disableTick(data_i_l,tick_num))
           elif choice == 6:
             print("Under Construction")
           elif choice != 7:
