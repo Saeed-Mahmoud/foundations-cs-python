@@ -19,15 +19,25 @@ def displayMenuUser():
 
 def main():
   #This is the main function that will run the entire code
+  import csv
+  listt=[]
+  with open('Events.csv','r')as file:
+    filecontent=csv.reader(file)
+    for row in filecontent:
+      listt.append(row)
   u_name=input("Enter username: ")
   adm="admin"
   if u_name==adm:
     count=0
-    while (count != 5): #O(1) becuase the loop is has a constant value
+    while (count != 6): #O(1) becuase the loop is has a constant value
       p_word=input("Enter Password: ")
       pswrd="admin123123"
-      if p_word!=pswrd:
+      if (count==5):
+        count+=1
+        print("You have reached the limit of attempts")
+      elif p_word!=pswrd:
         count +=1
+        print("Incorrect Password")
       else:
         displayMenuAdmin()
         choice = eval(input("Enter your choice:"))
@@ -52,7 +62,7 @@ def main():
 
         print("\n---> You Exited!")
         break
-      
+    
 
   else:
     displayMenuUser()
